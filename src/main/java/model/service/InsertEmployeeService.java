@@ -26,10 +26,10 @@ public class InsertEmployeeService {
 	 * @return リソースに登録されている全ての部門情報のリスト
 	 * @throws ServiceException リソースの接続に失敗、又は、情報の取得に失敗
 	 */
-	public List<Department> readDepartmentAll() throws ServiceException{
+	public List<Department> readDepartmentAll() throws ServiceException {
 		ConnectionManager c = new ConnectionManager();
 		List<Department> deptList;
-		try(Connection connection = c.getConnection();) {
+		try (Connection connection = c.getConnection();) {
 			try {
 				DepartmentDAO dao = new DepartmentDAO(connection);
 				deptList = dao.selectAll();
@@ -52,10 +52,10 @@ public class InsertEmployeeService {
 	 * @return true:被っている false:被っていない
 	 * @throws ServiceException リソースの接続に失敗、又は、情報の取得に失敗
 	 */
-	public boolean isDuplicateMailAddress(String mailAddress) throws ServiceException{
+	public boolean isDuplicateMailAddress(String mailAddress) throws ServiceException {
 		ConnectionManager c = new ConnectionManager();
 		Employee employee;
-		try(Connection connection = c.getConnection();) {
+		try (Connection connection = c.getConnection();) {
 			try {
 				EmployeeDAO dao = new EmployeeDAO(connection);
 				employee = dao.selectByMailAddress(mailAddress);
@@ -78,7 +78,7 @@ public class InsertEmployeeService {
 	public Department readDepartmentByDeptId(int deptId) throws ServiceException {
 		ConnectionManager c = new ConnectionManager();
 		Department department;
-		try(Connection connection = c.getConnection();) {
+		try (Connection connection = c.getConnection();) {
 			try {
 				DepartmentDAO dao = new DepartmentDAO(connection);
 				department = dao.selectByDeptId(deptId);
@@ -102,7 +102,7 @@ public class InsertEmployeeService {
 	 */
 	public void createEmployee(Employee employee) throws ServiceException {
 		ConnectionManager c = new ConnectionManager();
-		try(Connection connection = c.getConnection();) {
+		try (Connection connection = c.getConnection();) {
 			try {
 				EmployeeDAO dao = new EmployeeDAO(connection);
 				dao.insertEmp(employee);

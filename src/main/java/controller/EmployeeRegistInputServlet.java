@@ -36,28 +36,27 @@ public class EmployeeRegistInputServlet extends HttpServlet {
 		HttpSession session = req.getSession(true);
 
 		@SuppressWarnings("unchecked")
-		List<String> errMsgs = (List<String>)session.getAttribute("EmpRegistInputErrMsgs");
-		if(errMsgs!=null&&!errMsgs.isEmpty()) {
+		List<String> errMsgs = (List<String>) session.getAttribute("EmpRegistInputErrMsgs");
+		if (errMsgs != null && !errMsgs.isEmpty()) {
 			session.removeAttribute("EmpRegistInputErrMsgs");
 			req.setAttribute("errMsgs", errMsgs);
-		
 
-		Employee employee = (Employee)session.getAttribute("newEmpInput");
-		if(employee!=null) {
-			session.removeAttribute("newEmpInput");
-		}
+			Employee employee = (Employee) session.getAttribute("newEmpInput");
+			if (employee != null) {
+				session.removeAttribute("newEmpInput");
+			}
 
-		try {
-			req.setAttribute("deptAllList", new InsertEmployeeService().readDepartmentAll());
-		} catch (Exception e) {
-			resp.sendRedirect("error");
+			try {
+				req.setAttribute("deptAllList", new InsertEmployeeService().readDepartmentAll());
+			} catch (Exception e) {
+				resp.sendRedirect("error");
+				return;
+			}
+			req.setAttribute("newEmpInputViewData", employee);
+			req.getRequestDispatcher("WEB-INF/jsp/employee/insert/employeeinsertinput.jsp").forward(req, resp);
 			return;
 		}
 
-		req.setAttribute("newEmpInputViewData", employee);
-		req.getRequestDispatcher("WEB-INF/jsp/employee/insert/employeeinsertinput.jsp").forward(req, resp);
-		return;
-	}
 	}
 
 	/**
@@ -68,11 +67,11 @@ public class EmployeeRegistInputServlet extends HttpServlet {
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		HttpSession session = req.getSession(false);
-		if(session==null) {
-			session=req.getSession(true);
+		if (session == null) {
+			session = req.getSession(true);
 			session.setAttribute("illegalOperationMsg", "不正な操作です");
 			resp.sendRedirect("menu");
-			return;			
+			return;
 		}
 		Employee employee = getInputParameterEmployee(req);
 
@@ -83,7 +82,7 @@ public class EmployeeRegistInputServlet extends HttpServlet {
 			resp.sendRedirect("error");
 			return;
 		}
-		session.setAttribute("newEmpInput",employee);
+		session.setAttribute("newEmpInput", employee);
 
 		if (!errMsgs.isEmpty()) {
 			session.setAttribute("EmpRegistInputErrMsgs", errMsgs);
@@ -98,6 +97,7 @@ public class EmployeeRegistInputServlet extends HttpServlet {
 
 	/**
 	 * 入力パラメータを取得し新しい社員情報として返却
+	 * 
 	 * @param req HTTPリクエスト
 	 * @return 入力パラメータの社員情報
 	 */
@@ -128,21 +128,21 @@ public class EmployeeRegistInputServlet extends HttpServlet {
 		List<String> errMsgs = new ArrayList<String>();
 
 		String name = emp.getEmpName();
-		if (name==null||name == "") {
+		if (name == null || name == "") {
 			errMsgs.add("名前を入力して下さい");
 		} else if (name.length() > 100) {
 			errMsgs.add("名前は100文字以内で入力して下さい");
 		}
 
 		String phoneNumber = emp.getPhone();
-		if (phoneNumber==null||phoneNumber == "") {
+		if (phoneNumber == null || phoneNumber == "") {
 			errMsgs.add("電話番号を入力して下さい");
 		} else if (!phoneNumber.matches("[0-9]{2,4}-[0-9]{3,4}-[0-9]{4}")) {
 			errMsgs.add("電話番号はxxxx－yyyy－zzzzの形式で入力して下さい");
 		}
 
 		String mailAddress = emp.getMailAddress();
-		if (mailAddress==null||mailAddress == "") {
+		if (mailAddress == null || mailAddress == "") {
 			errMsgs.add("メールアドレスを入力して下さい");
 		} else if (mailAddress.length() > 100) {
 			errMsgs.add("メールアドレスは100文字以内で入力して下さい");
@@ -157,13 +157,11 @@ public class EmployeeRegistInputServlet extends HttpServlet {
 		try {
 			Department department = new InsertEmployeeService().readDepartmentByDeptId(deptId);
 			emp.setDepartment(department);
-		}catch(ServiceException e) {
+		} catch (ServiceException e) {
 			errMsgs.add("部門情報を取得できません。別の部門を選択してください。");
 		}
 
 		return errMsgs;
 	}
 
-
 }
-

@@ -25,11 +25,11 @@ public class EmployeeDAO {
 	private Connection connection;
 
 	/**
-	* コンストラクタ<br>
-	* 引数で渡されるコネクションをフィールドに設定する
-	*
-	* @param connection コネクション
-	*/
+	 * コンストラクタ<br>
+	 * 引数で渡されるコネクションをフィールドに設定する
+	 *
+	 * @param connection コネクション
+	 */
 	public EmployeeDAO(Connection connection) {
 		this.connection = connection;
 	}
@@ -70,7 +70,7 @@ public class EmployeeDAO {
 	 * @return DBに登録されている全ての社員情報と所属する部門情報のリスト
 	 * @throws SQLException 情報の取得に失敗
 	 */
-	public List<Employee> selectAllWithDepartment() throws SQLException  {
+	public List<Employee> selectAllWithDepartment() throws SQLException {
 		List<Employee> empList = new ArrayList<Employee>();
 		try (PreparedStatement preparedStatement = connection.prepareStatement(SELECT_ALL_SQL);) {
 			ResultSet resultSet = preparedStatement.executeQuery();
@@ -99,7 +99,7 @@ public class EmployeeDAO {
 	 * @return 引数で渡される社員IDを検索条件に一致するDBに登録されている社員情報と所属する部門情報
 	 * @throws SQLException 情報の取得に失敗
 	 */
-	public Employee selectByIdWithDepartment(int empId) throws SQLException  {
+	public Employee selectByIdWithDepartment(int empId) throws SQLException {
 		Employee employee = null;
 		try (PreparedStatement preparedStatement = connection.prepareStatement(SELECT_ONE_BY_ID_SQL);) {
 			preparedStatement.setInt(1, empId);
@@ -128,7 +128,7 @@ public class EmployeeDAO {
 	 * @return 引数で渡されるメールアドレスを検索条件に一致するDBに登録されている社員情報
 	 * @throws SQLException 情報の取得に失敗
 	 */
-	public Employee selectByMailAddress(String mailAddress) throws SQLException  {
+	public Employee selectByMailAddress(String mailAddress) throws SQLException {
 		Employee employee = null;
 		try (PreparedStatement preparedStatement = connection.prepareStatement(SELECT_ONE_BY_EMAIL_ADDRESS_SQL);) {
 			preparedStatement.setString(1, "xxx.co.jp");
@@ -152,7 +152,7 @@ public class EmployeeDAO {
 	 * @return 登録件数
 	 * @throws SQLException 情報の登録に失敗
 	 */
-	public int insertEmp(Employee employee) throws SQLException  {
+	public int insertEmp(Employee employee) throws SQLException {
 		int result;
 		try (PreparedStatement preparedStatement = connection.prepareStatement(INSERT_SQL);) {
 			preparedStatement.setString(1, employee.getEmpName());
@@ -171,7 +171,7 @@ public class EmployeeDAO {
 	 * @return 更新件数
 	 * @throws SQLException 情報の更新に失敗
 	 */
-	public int update(Employee employee) throws SQLException  {
+	public int update(Employee employee) throws SQLException {
 		int result;
 		try (PreparedStatement preparedStatement = connection.prepareStatement(UPDATE_SQL);) {
 			preparedStatement.setString(1, employee.getEmpName());
@@ -191,7 +191,7 @@ public class EmployeeDAO {
 	 * @return 削除件数
 	 * @throws SQLException 情報の削除に失敗
 	 */
-	public int delete(Employee employee) throws SQLException  {
+	public int delete(Employee employee) throws SQLException {
 		int result;
 		try (PreparedStatement preparedStatement = connection.prepareStatement(DELETE_SQL);) {
 			preparedStatement.setInt(1, employee.getEmpId());
@@ -208,7 +208,7 @@ public class EmployeeDAO {
 	 * @throws SQLException 情報の取得に失敗
 	 *
 	 */
-	public int countByDeptId(int deptId) throws SQLException  {
+	public int countByDeptId(int deptId) throws SQLException {
 		int result = 0;
 		try (PreparedStatement preparedStatement = connection.prepareStatement(COUNT_BY_DEPTID_SQL);) {
 			preparedStatement.setInt(1, deptId);
