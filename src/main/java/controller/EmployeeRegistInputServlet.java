@@ -53,9 +53,10 @@ public class EmployeeRegistInputServlet extends HttpServlet {
 				return;
 			}
 			req.setAttribute("newEmpInputViewData", employee);
-			req.getRequestDispatcher("WEB-INF/jsp/employee/insert/employeeinsertinput.jsp").forward(req, resp);
-			return;
+
 		}
+		req.getRequestDispatcher("WEB-INF/jsp/employee/insert/employeeinsertinput.jsp").forward(req, resp);
+		return;
 
 	}
 
