@@ -1,0 +1,89 @@
+// ============================================================
+//  webapp-exercise  —  Servlet / JSP 演習プロジェクト
+//  JDK 17 / Jakarta EE 10 (jakarta.servlet) / war + Gretty(Tomcat 10.1)
+// ============================================================
+
+plugins {
+    id 'war'
+    id 'org.gretty' version '4.1.6'
+    id 'jacoco'
+}
+
+group   = 'com.fullness'
+version = '1.0.0'
+
+java {
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(17)
+    }
+}
+
+repositories {
+    mavenCentral()
+}
+
+ext {
+    jakartaServletApi = '6.0.0'
+    jakartaJspApi     = '3.1.1'
+    jstlApiVersion    = '3.0.0'
+    jstlImplVersion   = '3.0.1'
+    lombokVersion     = '1.18.34'
+    postgresqlVersion = '42.7.4'
+    junitVersion      = '5.10.3'
+}
+
+dependencies {
+    compileOnly "jakarta.servlet:jakarta.servlet-api:${jakartaServletApi}"
+    compileOnly "jakarta.servlet.jsp:jakarta.servlet.jsp-api:${jakartaJspApi}"
+
+    implementation "jakarta.servlet.jsp.jstl:jakarta.servlet.jsp.jstl-api:${jstlApiVersion}"
+    runtimeOnly    "org.glassfish.web:jakarta.servlet.jsp.jstl:${jstlImplVersion}"
+
+    compileOnly             "org.projectlombok:lombok:${lombokVersion}"
+    annotationProcessor     "org.projectlombok:lombok:${lombokVersion}"
+    testCompileOnly         "org.projectlombok:lombok:${lombokVersion}"
+    testAnnotationProcessor "org.projectlombok:lombok:${lombokVersion}"
+
+    implementation "org.postgresql:postgresql:${postgresqlVersion}"
+
+    testImplementation "org.junit.jupiter:junit-jupiter:${junitVersion}"
+    testRuntimeOnly    "org.junit.platform:junit-platform-launcher"
+}
+
+tasks.withType(JavaCompile).configureEach {
+    options.encoding = 'UTF-8'
+}
+
+// 模範解答はコンパイルが通るので javadoc が生成できる（日本語対応）
+tasks.named('javadoc') {
+    options.encoding    = 'UTF-8'
+    options.charSet     = 'UTF-8'
+    options.docEncoding = 'UTF-8'
+    options.addBooleanOption('Xdoclint:none', true)
+    title = 'webapp-exercise-answer API'
+    destinationDir = file("$projectDir/doc")
+}
+
+gretty {
+    servletContainer = 'tomcat10'
+    contextPath      = '/webapp'
+    httpPort         = 8080
+}
+
+jacoco {
+    toolVersion = '0.8.12'            // JDK17対応の安定版
+}
+
+test {
+    useJUnitPlatform()
+    finalizedBy jacocoTestReport      // テスト後にレポート生成
+}
+
+jacocoTestReport {
+    dependsOn test
+    reports {
+        html.required = true          // build/reports/jacoco/test/html/index.html
+        xml.required  = false
+        csv.required  = false
+    }
+}
