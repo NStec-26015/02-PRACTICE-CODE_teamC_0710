@@ -40,21 +40,19 @@ public class EmployeeRegistInputServlet extends HttpServlet {
 		if (errMsgs != null && !errMsgs.isEmpty()) {
 			session.removeAttribute("EmpRegistInputErrMsgs");
 			req.setAttribute("errMsgs", errMsgs);
-
-			Employee employee = (Employee) session.getAttribute("newEmpInput");
-			if (employee != null) {
-				session.removeAttribute("newEmpInput");
-			}
-
-			try {
-				req.setAttribute("deptAllList", new InsertEmployeeService().readDepartmentAll());
-			} catch (Exception e) {
-				resp.sendRedirect("error");
-				return;
-			}
-			req.setAttribute("newEmpInputViewData", employee);
-
 		}
+		Employee employee = (Employee) session.getAttribute("newEmpInput");
+		if (employee != null) {
+			session.removeAttribute("newEmpInput");
+		}
+
+		try {
+			req.setAttribute("deptAllList", new InsertEmployeeService().readDepartmentAll());
+		} catch (Exception e) {
+			resp.sendRedirect("error");
+			return;
+		}
+		req.setAttribute("newEmpInputViewData", employee);
 		req.getRequestDispatcher("WEB-INF/jsp/employee/insert/employeeinsertinput.jsp").forward(req, resp);
 		return;
 
@@ -110,6 +108,7 @@ public class EmployeeRegistInputServlet extends HttpServlet {
 		Employee employee = new Employee();
 		employee.setEmpName(name);
 		employee.setDeptId(deptId);
+		employee.setPhone(phone);
 		employee.setMailAddress(mailAddress);
 
 		return employee;
