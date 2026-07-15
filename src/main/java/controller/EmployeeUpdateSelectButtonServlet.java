@@ -62,4 +62,3 @@ public class EmployeeUpdateSelectButtonServlet extends HttpServlet {
 		return Integer.parseInt(empId);
 	}
 }
-
