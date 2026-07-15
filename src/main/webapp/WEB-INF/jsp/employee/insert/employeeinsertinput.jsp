@@ -33,7 +33,7 @@
 												value="${newEmpInputViewData.empName}" class="form-control"></td>
 									</tr>
 									<tr>
-										<td class="bg-dark text-light" width="60">所属部門</td>
+										<td class="bg-dark text-light" width="60">部門名</td>
 										<td width="180"><select name="deptId" size="1" class="form-control">
 												<c:forEach var="dept" items="${deptAllList}">
 													<c:if test="${!empty newEmpInputViewData}">
@@ -63,7 +63,7 @@
 												class="form-control"></td>
 									</tr>
 									<tr>
-										<td class="bg-dark text-light" width="60">E-mailアドレス</td>
+										<td class="bg-dark text-light" width="60">メールアドレス</td>
 										<td width="180"><input type="text" name="mailAddress"
 												value="${newEmpInputViewData.mailAddress}"
 												placeholder="aaa@example.co.jp" class="form-control"></td>
