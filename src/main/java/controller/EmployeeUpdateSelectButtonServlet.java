@@ -39,7 +39,7 @@ public class EmployeeUpdateSelectButtonServlet extends HttpServlet {
 
 		Employee targetEmp;
 		try {
-			int empId = getInputParameterEmpID(req);
+			int empId = getInputParameterEmpId(req);
 			targetEmp = new UpdateEmployeeService().readEmployeeByEmpId(empId);
 		} catch (ServiceException e) {
 			resp.sendRedirect("error");
