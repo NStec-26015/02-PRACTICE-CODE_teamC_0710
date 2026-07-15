@@ -76,6 +76,13 @@ public class InsertEmployeeServiceTest {
     }
 
     @Test
+    @DisplayName("部門情報を部門IDで取得:データなし")
+    public void testReadDepartmentByDeptId02() throws Exception {
+        Department expected = TestUtil.dept102;
+        assertThrows(ServiceException.class, () -> target.readDepartmentByDeptId(expected.getDeptId()));
+    }
+
+    @Test
     @DisplayName("社員情報を登録する")
     public void testCreateEmployee01() throws Exception {
         TestUtil.setDS101ToDB();
@@ -90,6 +97,25 @@ public class InsertEmployeeServiceTest {
         List<Employee> actual = new GetEmployeeListService().readEmployeeAllWithDeptName();
         assertEquals(1, actual.size());
         assertEquals("山田太郎", actual.get(0).getEmpName());
+        assertEquals("taro@foo.bar.baz", actual.get(0).getMailAddress());
+        assertEquals(TestUtil.dept101, actual.get(0).getDepartment());
+    }
+
+    @Test
+    @DisplayName("社員情報を登録する")
+    public void testCreateEmployee02() throws Exception {
+        TestUtil.setDS101ToDB();
+        Employee employee = new Employee();
+        employee.setEmpName("山田");
+        employee.setDeptId(TestUtil.dept101.getDeptId());
+        employee.setPhone("000-1111-2222");
+        employee.setMailAddress("taro@foo.bar.baz");
+
+        target.createEmployee(employee);
+
+        List<Employee> actual = new GetEmployeeListService().readEmployeeAllWithDeptName();
+        assertEquals(1, actual.size());
+        assertNotEquals("山田太郎", actual.get(0).getEmpName());
         assertEquals("taro@foo.bar.baz", actual.get(0).getMailAddress());
         assertEquals(TestUtil.dept101, actual.get(0).getDepartment());
     }
