@@ -37,7 +37,7 @@ public class EmployeeDAO {
 	/**
 	 * 全件検索SQL
 	 */
-	private static final String SELECT_ALL_SQL = "SELECT emp_id, emp_name, d.dept_id, dept_name, phone_number, email_address FROM employee e INNER JOIN department d ON e.dept_id = d.dept_id ORDER BY emp_id";
+	private static final String SELECT_ALL_SQL = "SELECT emp_id, empName, d.dept_id, dept_name, phone_number, email_address FROM employee e INNER JOIN department d ON e.dept_id = d.dept_id ORDER BY emp_id";
 	/**
 	 * １件検索（条件：社員ID）SQL
 	 */
