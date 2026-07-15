@@ -108,7 +108,7 @@ public class EmployeeRegistInputServlet extends HttpServlet {
 		Employee employee = new Employee();
 		employee.setEmpName(name);
 		employee.setDeptId(deptId);
-		employee.setPhone(phone);
+		employee.setPhone(phone);// issue6修正点
 		employee.setMailAddress(mailAddress);
 
 		return employee;
