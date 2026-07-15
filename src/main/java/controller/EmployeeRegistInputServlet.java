@@ -37,15 +37,15 @@ public class EmployeeRegistInputServlet extends HttpServlet {
 
 		@SuppressWarnings("unchecked")
 		List<String> errMsgs = (List<String>) session.getAttribute("EmpRegistInputErrMsgs");
-		Employee employee;
 		if (errMsgs != null && !errMsgs.isEmpty()) {
 			session.removeAttribute("EmpRegistInputErrMsgs");
 			req.setAttribute("errMsgs", errMsgs);
 		}
-		employee = (Employee) session.getAttribute("newEmpInput");
+		Employee employee = (Employee) session.getAttribute("newEmpInput");
 		if (employee != null) {
 			session.removeAttribute("newEmpInput");
 		}
+
 		try {
 			req.setAttribute("deptAllList", new InsertEmployeeService().readDepartmentAll());
 		} catch (Exception e) {
@@ -54,6 +54,8 @@ public class EmployeeRegistInputServlet extends HttpServlet {
 		}
 		req.setAttribute("newEmpInputViewData", employee);
 		req.getRequestDispatcher("WEB-INF/jsp/employee/insert/employeeinsertinput.jsp").forward(req, resp);
+		return;
+
 	}
 
 	/**
