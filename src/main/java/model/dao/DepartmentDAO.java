@@ -110,9 +110,8 @@ public class DepartmentDAO {
 	 * @throws SQLException 情報の取得に失敗
 	 */
 	public Department selectByDeptName(String deptName) throws SQLException {
-		Department department = null;
-		try (PreparedStatement preparedStatement = connection
-				.prepareStatement(SELECT_ONE_BY_NAME_SQL + "'" + deptName + "'");) {
+		Department department = new Department();
+		try (PreparedStatement preparedStatement = connection.prepareStatement(SELECT_ONE_BY_NAME_SQL);) {
 			preparedStatement.setString(1, deptName);
 			ResultSet resultSet = preparedStatement.executeQuery();
 			if (resultSet.next()) {

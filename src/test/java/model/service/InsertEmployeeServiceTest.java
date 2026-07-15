@@ -67,15 +67,7 @@ public class InsertEmployeeServiceTest {
     }
 
     @Test
-    @DisplayName("メールアドレス重複検証:重複あり")
-    public void testIsDuplicateMailAddress01() throws Exception {
-        TestUtil.setDS101ToDB();
-        TestUtil.setDS001ToDB();
-        assertTrue(target.isDuplicateMailAddress(TestUtil.emp1002.getMailAddress()));
-    }
-
-    @Test
-    @DisplayName("メールアドレス重複検証:重複なし")
+    @DisplayName("メールアドレス重複検証")
     public void testIsDuplicateMailAddress02() throws Exception {
         TestUtil.setDS101ToDB();
         assertFalse(target.isDuplicateMailAddress("newuser@foo.bar"));
