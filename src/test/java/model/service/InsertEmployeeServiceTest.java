@@ -87,17 +87,17 @@ public class InsertEmployeeServiceTest {
     public void testCreateEmployee01() throws Exception {
         TestUtil.setDS101ToDB();
         Employee employee = new Employee();
-        employee.setEmpName("佐藤太郎");
+        employee.setEmpName("山田太郎");
         employee.setDeptId(TestUtil.dept101.getDeptId());
-        employee.setPhone("090-1234-5678");
-        employee.setMailAddress("sato@foo.bar");
+        employee.setPhone("000-1111-2222");
+        employee.setMailAddress("taro@foo.bar.baz");
 
         target.createEmployee(employee);
 
         List<Employee> actual = new GetEmployeeListService().readEmployeeAllWithDeptName();
         assertEquals(1, actual.size());
-        assertEquals("佐藤太郎", actual.get(0).getEmpName());
-        assertEquals("sato@foo.bar", actual.get(0).getMailAddress());
+        assertEquals("山田太郎", actual.get(0).getEmpName());
+        assertEquals("taro@foo.bar.baz", actual.get(0).getMailAddress());
         assertEquals(TestUtil.dept101, actual.get(0).getDepartment());
     }
 }
