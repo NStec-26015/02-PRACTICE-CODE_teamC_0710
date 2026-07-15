@@ -43,8 +43,8 @@ public class EmployeeUpdateInputServlet extends HttpServlet {
 		session.removeAttribute("updEmpInput");
 
 		@SuppressWarnings("unchecked")
-		List<String> errMsgs = (List<String>)session.getAttribute("EmpUpdateInputErrMsgs");
-		if(errMsgs!=null&&!errMsgs.isEmpty()) {
+		List<String> errMsgs = (List<String>) session.getAttribute("EmpUpdateInputErrMsgs");
+		if (errMsgs != null && !errMsgs.isEmpty()) {
 			session.removeAttribute("EmpUpdateInputErrMsgs");
 			req.setAttribute("errMsgs", errMsgs);
 		}
@@ -60,7 +60,6 @@ public class EmployeeUpdateInputServlet extends HttpServlet {
 		req.getRequestDispatcher("WEB-INF/jsp/employee/update/employeeupdateinput.jsp").forward(req, resp);
 	}
 
-
 	/**
 	 * 社員更新入力画面の確認ボタンから実行され、入力内容をセッションに保存して確認画面にリダイレクト<br>
 	 * 入力内容に問題があれば、エラーメッセージをセッションに保存して入力画面にリダイレクト
@@ -70,11 +69,11 @@ public class EmployeeUpdateInputServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
 		HttpSession session = req.getSession(false);
-		if(session==null) {
-			session=req.getSession(true);
+		if (session == null) {
+			session = req.getSession(true);
 			session.setAttribute("illegalOperationMsg", "不正な操作です");
 			resp.sendRedirect("menu");
-			return;			
+			return;
 		}
 		Employee employee = getInputParameterEmployee(req);
 
@@ -85,7 +84,7 @@ public class EmployeeUpdateInputServlet extends HttpServlet {
 			resp.sendRedirect("error");
 			return;
 		}
-		session.setAttribute("updEmpInput",employee);
+		session.setAttribute("updEmpInput", employee);
 
 		if (!errMsgs.isEmpty()) {
 			session.setAttribute("EmpUpdateInputErrMsgs", errMsgs);
@@ -100,6 +99,7 @@ public class EmployeeUpdateInputServlet extends HttpServlet {
 
 	/**
 	 * 入力パラメータを取得し新しい社員情報として返却
+	 * 
 	 * @param req HTTPリクエスト
 	 * @return 入力パラメータの社員情報
 	 */
@@ -133,14 +133,14 @@ public class EmployeeUpdateInputServlet extends HttpServlet {
 		List<String> errMsgs = new ArrayList<String>();
 
 		String name = emp.getEmpName();
-		if (name==null||name == "") {
+		if (name == null || name == "") {
 			errMsgs.add("名前を入力して下さい");
 		} else if (name.length() > 100) {
 			errMsgs.add("名前は100文字以内で入力して下さい");
 		}
 
 		String phoneNumber = emp.getPhone();
-		if (phoneNumber==null||phoneNumber == "") {
+		if (phoneNumber == null || phoneNumber == "") {
 			errMsgs.add("電話番号を入力して下さい");
 		} else if (!phoneNumber.matches("[0-9]{2,4}-[0-9]{3,4}-[0-9]{4}")) {
 			errMsgs.add("電話番号はxxxx－yyyy－zzzzの形式で入力して下さい");
@@ -148,14 +148,14 @@ public class EmployeeUpdateInputServlet extends HttpServlet {
 
 		int empId = emp.getEmpId();
 		String mailAddress = emp.getMailAddress();
-		if (mailAddress==null||mailAddress == "") {
+		if (mailAddress == null || mailAddress == "") {
 			errMsgs.add("メールアドレスを入力して下さい");
 		} else if (mailAddress.length() > 100) {
 			errMsgs.add("メールアドレスは100文字以内で入力して下さい");
 		} else if (!mailAddress.matches(
 				"^(([0-9a-zA-Z!#$%&'*+-/=?^_`{}|~]+(.[0-9a-zA-Z!#$%&'*+-/=?^_`{}|~]+)*)|(\"[^\"]*\"))@[0-9a-zA-Z!#$%&'*+-/=?^_`{}|~]+(.[0-9a-zA-Z!#$%&'*+-/=?^_`{}|~]+)*$")) {
 			errMsgs.add("メールアドレスはxxxx@yyyyの形式で入力して下さい");
-		} else if (new UpdateEmployeeService().isDuplicateMailAddress(empId,mailAddress)) {
+		} else if (new UpdateEmployeeService().isDuplicateMailAddress(empId, mailAddress)) {
 			errMsgs.add("このアドレスは既に登録されています。別のアドレスで登録してください。");
 		}
 
@@ -163,11 +163,10 @@ public class EmployeeUpdateInputServlet extends HttpServlet {
 		try {
 			Department department = new UpdateEmployeeService().readDepartmentByDeptId(deptId);
 			emp.setDepartment(department);
-		}catch(ServiceException e) {
+		} catch (ServiceException e) {
 			errMsgs.add("部門情報を取得できません。別の部門を選択してください。");
 		}
 
 		return errMsgs;
 	}
 }
-
