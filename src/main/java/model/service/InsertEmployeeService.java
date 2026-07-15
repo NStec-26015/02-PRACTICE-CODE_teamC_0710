@@ -30,9 +30,11 @@ public class InsertEmployeeService {
 		ConnectionManager c = new ConnectionManager();
 		List<Department> deptList;
 		try (Connection connection = c.getConnection();) {
+
 			try {
 				DepartmentDAO dao = new DepartmentDAO(connection);
 				deptList = dao.selectAll();
+				// System.out.println("エラー");
 				if (deptList.isEmpty()) {
 					throw new ServiceException("該当するデータはありません");
 				}
