@@ -30,7 +30,7 @@ public class EmployeeRegistReInputButtonServlet extends HttpServlet {
 
 		HttpSession session = req.getSession(true);
 		Object isRegisted = session.getAttribute("empRegistedFlg");
-		if (isRegisted == null||(boolean)isRegisted) {
+		if (isRegisted == null || (boolean) isRegisted) {
 			session.setAttribute("illegalOperationMsg", "不正な操作です");
 			resp.sendRedirect("menu");
 			return;
@@ -44,6 +44,7 @@ public class EmployeeRegistReInputButtonServlet extends HttpServlet {
 
 	/**
 	 * 入力パラメータを取得し新しい社員情報として返却
+	 * 
 	 * @param req HTTPリクエスト
 	 * @return 入力パラメータの社員情報
 	 */
@@ -66,4 +67,3 @@ public class EmployeeRegistReInputButtonServlet extends HttpServlet {
 		return employee;
 	}
 }
-
