@@ -83,6 +83,55 @@ public class InsertEmployeeServiceTest {
     }
 
     @Test
+    @DisplayName("部門情報を取得:例外処理（DB処理エラー）")
+    public void testReadDepartmentAll03() throws Exception {
+        TestUtil.changeDBSetting();
+        try {
+            assertThrows(ServiceException.class, () -> target.readDepartmentAll());
+        } finally {
+            TestUtil.resetDBSetting();
+        }
+    }
+
+    @Test
+    @DisplayName("メールアドレスが登録済み:重複あり")
+    public void testIsDuplicateMailAddress01() throws Exception {
+        TestUtil.setDS101ToDB();
+        TestUtil.setDS001ToDB();
+        assertTrue(target.isDuplicateMailAddress(TestUtil.emp1001.getMailAddress()));
+    }
+
+    @Test
+    @DisplayName("メールアドレスが未登録:重複なし")
+    public void testIsDuplicateMailAddress02() throws Exception {
+        TestUtil.setDS101ToDB();
+        assertFalse(target.isDuplicateMailAddress("unknown@foo.bar.baz"));
+    }
+
+    @Test
+    @DisplayName("メールアドレス重複チェック:例外処理（DB処理エラー）")
+    public void testIsDuplicateMailAddress03() throws Exception {
+        TestUtil.changeDBSetting();
+        try {
+            assertThrows(ServiceException.class,
+                    () -> target.isDuplicateMailAddress(TestUtil.emp1001.getMailAddress()));
+        } finally {
+            TestUtil.resetDBSetting();
+        }
+    }
+
+    @Test
+    @DisplayName("部門情報を部門IDで取得:例外処理（DB処理エラー）")
+    public void testReadDepartmentByDeptId03() throws Exception {
+        TestUtil.changeDBSetting();
+        try {
+            assertThrows(ServiceException.class, () -> target.readDepartmentByDeptId(TestUtil.dept101.getDeptId()));
+        } finally {
+            TestUtil.resetDBSetting();
+        }
+    }
+
+    @Test
     @DisplayName("社員情報を登録する")
     public void testCreateEmployee01() throws Exception {
         TestUtil.setDS101ToDB();
@@ -118,5 +167,23 @@ public class InsertEmployeeServiceTest {
         assertNotEquals("山田太郎", actual.get(0).getEmpName());
         assertEquals("taro@foo.bar.baz", actual.get(0).getMailAddress());
         assertEquals(TestUtil.dept101, actual.get(0).getDepartment());
+    }
+
+    @Test
+    @DisplayName("社員情報登録:例外処理（DB処理エラー）")
+    public void testCreateEmployee03() throws Exception {
+        TestUtil.setDS101ToDB();
+        Employee employee = new Employee();
+        employee.setEmpName("山田太郎");
+        employee.setDeptId(TestUtil.dept101.getDeptId());
+        employee.setPhone("000-1111-2222");
+        employee.setMailAddress("taro@foo.bar.baz");
+
+        TestUtil.changeDBSetting();
+        try {
+            assertThrows(ServiceException.class, () -> target.createEmployee(employee));
+        } finally {
+            TestUtil.resetDBSetting();
+        }
     }
 }
