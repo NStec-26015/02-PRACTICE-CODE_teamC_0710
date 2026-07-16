@@ -39,7 +39,7 @@ public class EmployeeDeleteSelectButtonServlet  extends HttpServlet {
 
 		Employee targetEmp;
 		try {
-			int empId = getInputParameterEmpID(req);
+			int empId = getInputParameterEmpId(req);
 			targetEmp = new DeleteEmployeeService().readEmployeeByEmpId(empId);
 		} catch (ServiceException e) {
 			resp.sendRedirect("error");
@@ -57,7 +57,7 @@ public class EmployeeDeleteSelectButtonServlet  extends HttpServlet {
 	 * @param req HTTPリクエスト
 	 * @return 入力パラメータの社員ID
 	 */
-	private int getInputParameterEmpID(HttpServletRequest req){
+	private int getInputParameterEmpId(HttpServletRequest req){
 		String empId = req.getParameter("empId");
 		return Integer.parseInt(empId);
 	}
