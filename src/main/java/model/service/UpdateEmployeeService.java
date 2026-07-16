@@ -22,7 +22,7 @@ public class UpdateEmployeeService {
 	/**
 	 * メールアドレスがリソースに登録済のもの（更新前の自身のものは含まない）と被っているかどうかを検証し返却
 	 *
-	 * @param empId 更新する社員のid
+	 * @param empId       更新する社員のid
 	 * @param mailAddress 検証するメールアドレス
 	 * @return true:被っている false:被っていない
 	 * @throws ServiceException リソースの接続に失敗、又は、情報の取得に失敗
@@ -149,4 +149,3 @@ public class UpdateEmployeeService {
 		}
 	}
 }
-

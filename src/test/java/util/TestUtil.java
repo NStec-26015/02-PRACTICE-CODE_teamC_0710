@@ -29,56 +29,57 @@ public class TestUtil {
 	public static final Department dept104;
 
 	static {
-		dept101=new Department();
+		dept101 = new Department();
 		dept101.setDeptId(101);
 		dept101.setDeptName("人事部");
-		dept102=new Department();
+		dept102 = new Department();
 		dept102.setDeptId(102);
 		dept102.setDeptName("企画部");
-		dept103=new Department();
+		dept103 = new Department();
 		dept103.setDeptId(103);
 		dept103.setDeptName("システム開発部");
-		dept103_upd=new Department();
+		dept103_upd = new Department();
 		dept103_upd.setDeptId(103);
 		dept103_upd.setDeptName("営業部");
-		dept104=new Department();
+		dept104 = new Department();
 		dept104.setDeptId(104);
-		dept104.setDeptName("営業部");;
-		emp1001=new Employee();
+		dept104.setDeptName("営業部");
+		;
+		emp1001 = new Employee();
 		emp1001.setEmpId(1001);
 		emp1001.setDeptId(101);
 		emp1001.setEmpName("山田太郎");
 		emp1001.setPhone("000-1111-2222");
 		emp1001.setMailAddress("taro@foo.bar.baz");
 		emp1001.setDepartment(dept101);
-		emp1001_nodept=new Employee();
+		emp1001_nodept = new Employee();
 		emp1001_nodept.setEmpId(1001);
 		emp1001_nodept.setDeptId(101);
 		emp1001_nodept.setEmpName("山田太郎");
 		emp1001_nodept.setPhone("000-1111-2222");
 		emp1001_nodept.setMailAddress("taro@foo.bar.baz");
-		emp1002=new Employee();
+		emp1002 = new Employee();
 		emp1002.setEmpId(1002);
 		emp1002.setDeptId(102);
 		emp1002.setEmpName("川田次郎");
 		emp1002.setPhone("000-2222-3333");
 		emp1002.setMailAddress("jiro@foo.bar.baz");
 		emp1002.setDepartment(dept102);
-		emp1003=new Employee();
+		emp1003 = new Employee();
 		emp1003.setEmpId(1003);
 		emp1003.setDeptId(101);
 		emp1003.setEmpName("海田三郎");
 		emp1003.setPhone("000-3333-4444");
 		emp1003.setMailAddress("saburo@foo.bar.baz");
 		emp1003.setDepartment(dept101);
-		emp1003_upd=new Employee();
+		emp1003_upd = new Employee();
 		emp1003_upd.setEmpId(1003);
 		emp1003_upd.setDeptId(103);
 		emp1003_upd.setEmpName("空田四郎");
 		emp1003_upd.setPhone("000-4444-5555");
 		emp1003_upd.setMailAddress("shiro@foo.bar.baz");
 		emp1003_upd.setDepartment(dept103);
-		emp1004=new Employee();
+		emp1004 = new Employee();
 		emp1004.setEmpId(1004);
 		emp1004.setDeptId(103);
 		emp1004.setEmpName("空田四郎");
@@ -130,6 +131,7 @@ public class TestUtil {
 
 	/**
 	 * 社員リスト作成
+	 * 
 	 * @return 社員リスト
 	 */
 	public static List<Employee> getDS001() {
@@ -152,6 +154,7 @@ public class TestUtil {
 
 	/**
 	 * 社員データ用：空のリストを作成する
+	 * 
 	 * @return 空のリスト
 	 */
 	public static List<Employee> getDS002() {
@@ -171,6 +174,7 @@ public class TestUtil {
 
 	/**
 	 * 部門リスト作成
+	 * 
 	 * @return 部門リスト
 	 */
 	public static List<Department> getDS101() {
@@ -193,6 +197,7 @@ public class TestUtil {
 
 	/**
 	 * 部門データ用：空のリストを作成する
+	 * 
 	 * @return 空のリスト
 	 */
 	public static List<Department> getDS102() {
