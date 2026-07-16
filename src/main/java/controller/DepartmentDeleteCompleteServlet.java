@@ -19,7 +19,7 @@ import model.dto.Department;
  *
  */
 @WebServlet("/deptdeletecomp")
-public class DepartmentDeleteCmpServlet extends HttpServlet {
+public class DepartmentDeleteCompleteServlet extends HttpServlet {
 
 	/**
 	 * 部門削除完了画面を表示<br>
@@ -43,4 +43,3 @@ public class DepartmentDeleteCmpServlet extends HttpServlet {
 		return;
 	}
 }
-

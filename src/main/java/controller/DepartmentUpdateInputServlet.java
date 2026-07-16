@@ -23,7 +23,7 @@ import model.service.UpdateDepartmentService;
  *
  */
 @WebServlet("/deptupdateinput")
-public class DepartmentUpdInputServlet extends HttpServlet {
+public class DepartmentUpdateInputServlet extends HttpServlet {
 	/**
 	 * 部門更新入力画面を表示するメソッド
 	 */
@@ -41,8 +41,8 @@ public class DepartmentUpdInputServlet extends HttpServlet {
 		session.removeAttribute("updDeptInput");
 
 		@SuppressWarnings("unchecked")
-		List<String> errMsgs = (List<String>)session.getAttribute("DeptUpdateInputErrMsgs");
-		if(errMsgs!=null&&!errMsgs.isEmpty()) {
+		List<String> errMsgs = (List<String>) session.getAttribute("DeptUpdateInputErrMsgs");
+		if (errMsgs != null && !errMsgs.isEmpty()) {
 			session.removeAttribute("DeptUpdateInputErrMsgs");
 			req.setAttribute("errMsgs", errMsgs);
 		}
@@ -50,7 +50,6 @@ public class DepartmentUpdInputServlet extends HttpServlet {
 		req.setAttribute("updDeptInputViewData", department);
 		req.getRequestDispatcher("WEB-INF/jsp/department/update/departmentupdateinput.jsp").forward(req, resp);
 	}
-
 
 	/**
 	 * 部門更新入力画面の確認ボタンから実行され、入力内容をセッションに保存して確認画面にリダイレクト<br>
@@ -61,11 +60,11 @@ public class DepartmentUpdInputServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
 		HttpSession session = req.getSession(false);
-		if(session==null) {
-			session=req.getSession(true);
+		if (session == null) {
+			session = req.getSession(true);
 			session.setAttribute("illegalOperationMsg", "不正な操作です");
 			resp.sendRedirect("menu");
-			return;			
+			return;
 		}
 		Department department = getInputParameterDepartment(req);
 
@@ -78,7 +77,7 @@ public class DepartmentUpdInputServlet extends HttpServlet {
 		}
 
 		if (!errMsgs.isEmpty()) {
-			session.setAttribute("updDeptInput",department);
+			session.setAttribute("updDeptInput", department);
 			session.setAttribute("DeptUpdateInputErrMsgs", errMsgs);
 			resp.sendRedirect("deptupdateinput");
 			return;
@@ -92,6 +91,7 @@ public class DepartmentUpdInputServlet extends HttpServlet {
 
 	/**
 	 * 入力パラメータを取得し新しい部門情報として返却
+	 * 
 	 * @param req HTTPリクエスト
 	 * @return 入力パラメータの部門情報
 	 */
@@ -124,7 +124,7 @@ public class DepartmentUpdInputServlet extends HttpServlet {
 			errMsgs.add("部門名を入力して下さい");
 		} else if (name.length() > 100) {
 			errMsgs.add("部門名は100文字以内で入力して下さい");
-		} else if (new UpdateDepartmentService().isDuplicateDeptName(id,name)) {
+		} else if (new UpdateDepartmentService().isDuplicateDeptName(id, name)) {
 			errMsgs.add("この部門名は既に登録されています。別の部門名で登録してください。");
 		}
 
