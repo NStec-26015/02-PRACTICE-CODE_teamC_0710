@@ -37,7 +37,7 @@ public class EmployeeUpdateCheckServlet extends HttpServlet {
 			resp.sendRedirect("menu");
 			return;
 		}
-		
+
 		session.removeAttribute("updEmpInput");
 		req.setAttribute("updEmpCheckViewData", employee);
 		req.getRequestDispatcher("WEB-INF/jsp/employee/update/employeeupdatecheck.jsp").forward(req, resp);
@@ -53,7 +53,7 @@ public class EmployeeUpdateCheckServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		HttpSession session = req.getSession(true);
 		Object isRegisted = session.getAttribute("empUpdatedFlg");
-		if (isRegisted == null||(boolean)isRegisted) {
+		if (isRegisted == null || (boolean) isRegisted) {
 			session.setAttribute("illegalOperationMsg", "不正な操作です");
 			resp.sendRedirect("menu");
 			return;
@@ -68,12 +68,13 @@ public class EmployeeUpdateCheckServlet extends HttpServlet {
 		}
 
 		session.setAttribute("updEmpComplete", employee);
-		resp.sendRedirect("empregistcomp");
+		resp.sendRedirect("empupdatecomp");
 		return;
 	}
 
 	/**
 	 * 入力パラメータを取得し新しい社員情報として返却
+	 * 
 	 * @param req HTTPリクエスト
 	 * @return 入力パラメータの社員情報
 	 */
