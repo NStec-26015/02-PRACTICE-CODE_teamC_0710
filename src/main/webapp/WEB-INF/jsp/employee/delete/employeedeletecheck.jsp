@@ -26,7 +26,11 @@
 							<table class="table table-bordered table-striped">
 								<tbody>
 									<tr>
-										<td class="bg-dark text-light" width="60">所属部門</td>
+										<td class="bg-dark text-light" width="60">名前</td>
+										<td width="180">${delEmpCheckViewData.empName}</td>
+									</tr>
+									<tr>
+										<td class="bg-dark text-light" width="60">部門名</td>
 										<td width="180">${delEmpCheckViewData.department.deptName}</td>
 									</tr>
 									<tr>
@@ -34,12 +38,8 @@
 										<td width="180">${delEmpCheckViewData.phone}</td>
 									</tr>
 									<tr>
-										<td class="bg-dark text-light" width="60">E-Mailアドレス</td>
+										<td class="bg-dark text-light" width="60">メールアドレス</td>
 										<td width="180">${delEmpCheckViewData.mailAddress}</td>
-									</tr>
-									<tr>
-										<td class="bg-dark text-light" width="60">名前</td>
-										<td width="180">${delEmpCheckViewData.empName}</td>
 									</tr>
 								</tbody>
 							</table>
