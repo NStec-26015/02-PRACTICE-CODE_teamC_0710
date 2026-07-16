@@ -33,6 +33,7 @@ public class GetEmployeeListService {
 				EmployeeDAO dao = new EmployeeDAO(connection);
 				empList = dao.selectAllWithDepartment();
 			} catch (SQLException e) {
+				// System.out.println(e.getMessage());
 				throw new ServiceException("取得失敗", e);
 			}
 		} catch (SQLException e) {

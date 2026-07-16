@@ -31,6 +31,7 @@ public class EmployeeListServlet extends HttpServlet {
 			req.setAttribute("empAllList", new GetEmployeeListService().readEmployeeAllWithDeptName());
 		} catch (ServiceException e) {
 			resp.sendRedirect("error");
+			// System.out.println(e.getMessage());
 			return;
 		}
 		req.getRequestDispatcher("WEB-INF/jsp/employee/select/employeeselectlist.jsp").forward(req, resp);

@@ -54,6 +54,14 @@ public class EmployeeRegistCheckServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		HttpSession session = req.getSession(true);
 		Employee employee = getInputParameterEmployee(req);
+		InsertEmployeeService insertEmployeeService = new InsertEmployeeService();
+
+		try {
+			insertEmployeeService.createEmployee(employee);
+		} catch (Exception e) {
+			resp.sendRedirect("error");
+			return;
+		}
 
 		// DAOがない
 		try {

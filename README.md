@@ -63,3 +63,17 @@ webapp-exercise/
 1. `./gradlew compileJava` でコンパイルエラーを解消する
 2. `./gradlew appRun` で起動し、各機能（社員・部門の一覧／登録／更新／削除）を操作して実行時の不具合を見つけて直す
 3. `./gradlew test` でテストを通す
+
+
+## データベース設定手順(初期設定)
+
+1. デスクトップにあるpgAdminを開く
+2. Serversを開き、以下の情報でログイン
+  - password: postgres
+3. Databases配下にあるpostgresを右クリック→Query Toolを選択
+4. 右側に表示されたQueryにソースコードにあるplan→sqlのcreate_table_data.sqlの内容をコピー＆ペースト
+5. Execute Script（再生マーク）を押下
+6. Databases配下にあるpostgresを展開→Schemas→public→tablesを開く
+7. 存在するテーブルすべてで以下の作業を行う
+    - テーブル（departmentなど）を右クリック→Propertiesを選択
+8. ソースコードで`gradle appRun`を実行し、ログインできるか確認
