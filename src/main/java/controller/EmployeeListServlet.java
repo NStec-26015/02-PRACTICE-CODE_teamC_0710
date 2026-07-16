@@ -19,7 +19,7 @@ import model.service.GetEmployeeListService;
  *
  */
 @WebServlet("/emplist")
-public class EmpListServlet extends HttpServlet {
+public class EmployeeListServlet extends HttpServlet {
 
 	/**
 	 * 社員一覧画面を表示<br>
