@@ -53,7 +53,6 @@ public class EmployeeRegistInputServlet extends HttpServlet {
 			resp.sendRedirect("error");
 			return;
 		}
-
 		req.setAttribute("newEmpInputViewData", employee);
 
 		req.getRequestDispatcher("WEB-INF/jsp/employee/insert/employeeinsertinput.jsp").forward(req, resp);
@@ -110,6 +109,7 @@ public class EmployeeRegistInputServlet extends HttpServlet {
 		Employee employee = new Employee();
 		employee.setEmpName(name);
 		employee.setDeptId(deptId);
+		employee.setPhone(phone);
 		employee.setMailAddress(mailAddress);
 		employee.setPhone(phone);
 

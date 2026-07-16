@@ -63,6 +63,14 @@ public class EmployeeRegistCheckServlet extends HttpServlet {
 			return;
 		}
 
+		// DAOがない
+		try {
+			new InsertEmployeeService().createEmployee(employee);
+		} catch (Exception e) {
+			resp.sendRedirect("error");
+			return;
+		}
+
 		session.setAttribute("newEmpComplete", employee);
 		resp.sendRedirect("empregistcomp");
 		return;

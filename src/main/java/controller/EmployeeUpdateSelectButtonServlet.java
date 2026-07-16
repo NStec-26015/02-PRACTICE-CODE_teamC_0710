@@ -30,16 +30,16 @@ public class EmployeeUpdateSelectButtonServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
 		HttpSession session = req.getSession(false);
-		if(session==null) {
-			session=req.getSession(true);
+		if (session == null) {
+			session = req.getSession(true);
 			session.setAttribute("illegalOperationMsg", "不正な操作です");
 			resp.sendRedirect("menu");
-			return;			
+			return;
 		}
 
 		Employee targetEmp;
 		try {
-			int empId = getInputParameterEmpID(req);
+			int empId = getInputParameterEmpId(req);
 			targetEmp = new UpdateEmployeeService().readEmployeeByEmpId(empId);
 		} catch (ServiceException e) {
 			resp.sendRedirect("error");
@@ -54,12 +54,12 @@ public class EmployeeUpdateSelectButtonServlet extends HttpServlet {
 
 	/**
 	 * 入力パラメータを取得し社員IDとして返却
+	 * 
 	 * @param req HTTPリクエスト
 	 * @return 入力パラメータの社員ID
 	 */
-	private int getInputParameterEmpID(HttpServletRequest req){
+	private int getInputParameterEmpId(HttpServletRequest req) {
 		String empId = req.getParameter("empId");
 		return Integer.parseInt(empId);
 	}
 }
-
