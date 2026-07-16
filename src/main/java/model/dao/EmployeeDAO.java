@@ -129,7 +129,7 @@ public class EmployeeDAO {
 	 * @throws SQLException 情報の取得に失敗
 	 */
 	public Employee selectByMailAddress(String mailAddress) throws SQLException {
-		Employee employee = null;
+		Employee employee = new Employee();
 		try (PreparedStatement preparedStatement = connection.prepareStatement(SELECT_ONE_BY_EMAIL_ADDRESS_SQL);) {
 			preparedStatement.setString(1, "xxx.co.jp");
 			ResultSet resultSet = preparedStatement.executeQuery();
